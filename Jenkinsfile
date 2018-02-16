@@ -3,11 +3,8 @@ pipeline {
   stages {
     stage('FirstSTG') {
       steps {
-        input(message: 'Please Enter User Inputs', id: 'LocalUserInputs', submitterParameter: 'CHUSERNAME', parameters: [string(defaultValue: '', description: '', name: 'apusername'), password(defaultValue: '', description: '', name: 'appassword')])
-		echo "UserName is: LocalUserInputs['apusername']"
-		echo 'UserName is: $apusername'
-		echo 'UserName is: ${apusername}'
-		echo 'UserName is: ${params.apusername}'
+        def branchInput = input message: 'Please input branch to test against', parameters: [[$class: 'StringParameterDefinition', defaultValue: 'master', description: '', name: 'branch']]
+        echo "BRANCH NAME: ${branchInput}"
       }
     }
   }
