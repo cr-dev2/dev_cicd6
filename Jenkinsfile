@@ -3,8 +3,8 @@ pipeline {
   stages {
     stage('FirstSTG') {
       steps {
-        def branchInput = input message: 'Please input branch to test against', parameters: [[$class: 'StringParameterDefinition', defaultValue: 'master', description: '', name: 'branch']]
-        echo "BRANCH NAME: ${branchInput}"
+		dev userInput = input id:'userInput', message: 'Please enter CloudHub UserID and Password', parameters: [string(defaultValue: '', description: '', name: 'apusername'), password(defaultValue: '', description: '', name: 'appassword')]
+        echo "BRANCH NAME: ${userInput}"
       }
     }
   }
