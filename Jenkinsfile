@@ -3,13 +3,17 @@ pipeline {
   stages {
     stage('FirstSTG') {
       steps {
-		def userInput = input(
-			id:'userInput', message: 'Please enter CloudHub UserID and Password', 
-			parameters: [
-			string(defaultValue: '', description: '', name: 'apusername'), 
-			password(defaultValue: '', description: '', name: 'appassword')
-			])
-        echo ('BRANCH NAME: '+userInput['apusername'])
+		script {
+                def userInput = input(
+                 id: 'userInput', message: 'Enter path of test reports:?', 
+                 parameters: [
+                 [$class: 'TextParameterDefinition', defaultValue: 'None', description: 'Path of config file', name: 'Config'],
+                 [$class: 'TextParameterDefinition', defaultValue: 'None', description: 'Test Info file', name: 'Test']
+                ])
+                echo ("IQA Sheet Path: "+userInput['Config'])
+                echo ("Test Info file path: "+userInput['Test'])
+
+                }
       }
     }
   }
